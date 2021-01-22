@@ -364,7 +364,7 @@ class LocationPickerState extends State<LocationPicker> {
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: latLng,
-            zoom: 16,
+            zoom: widget.initialZoom,
           ),
         ),
       );
