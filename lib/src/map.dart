@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
-import 'package:google_map_location_picker/generated/l10n.dart';
+
 import 'package:google_map_location_picker/src/providers/location_provider.dart';
 import 'package:google_map_location_picker/src/utils/loading_builder.dart';
 import 'package:google_map_location_picker/src/utils/log.dart';
@@ -240,7 +240,7 @@ class MapPickerState extends State<MapPicker> {
                         _placeId = data["placeId"];
                         return Text(
                           _address ??
-                              S.of(context)?.unnamedPlace ??
+                              
                               'Unnamed place',
                           style: TextStyle(fontSize: 18),
                         );
@@ -355,14 +355,14 @@ class MapPickerState extends State<MapPicker> {
             return true;
           },
           child: AlertDialog(
-            title: Text(S.of(context)?.access_to_location_denied ??
+            title: Text(
                 'Access to location denied'),
             content: Text(
-                S.of(context)?.allow_access_to_the_location_services ??
+                
                     'Allow access to the location services.'),
             actions: <Widget>[
               FlatButton(
-                child: Text(S.of(context)?.ok ?? 'Ok'),
+                child: Text( 'Ok'),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                   _initCurrentLocation();
@@ -388,15 +388,13 @@ class MapPickerState extends State<MapPicker> {
             return true;
           },
           child: AlertDialog(
-            title: Text(S.of(context)?.access_to_location_permanently_denied ??
+            title: Text(
                 'Access to location permanently denied'),
-            content: Text(S
-                    .of(context)
-                    ?.allow_access_to_the_location_services_from_settings ??
+            content: Text(
                 'Allow access to the location services for this App using the device settings.'),
             actions: <Widget>[
               FlatButton(
-                child: Text(S.of(context)?.ok ?? 'Ok'),
+                child: Text( 'Ok'),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                   openAppSettings();
@@ -419,11 +417,9 @@ class MapPickerState extends State<MapPicker> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(S.of(context)?.cant_get_current_location ??
+              title: Text(
                   "Can't get current location"),
-              content: Text(S
-                      .of(context)
-                      ?.please_make_sure_you_enable_gps_and_try_again ??
+              content: Text(
                   'Please make sure you enable GPS and try again'),
               actions: <Widget>[
                 FlatButton(
