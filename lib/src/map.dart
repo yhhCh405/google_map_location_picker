@@ -239,9 +239,7 @@ class MapPickerState extends State<MapPicker> {
                         _address = data["address"];
                         _placeId = data["placeId"];
                         return Text(
-                          _address ??
-                              
-                              'Unnamed place',
+                          _address ?? 'Unnamed place',
                           style: TextStyle(fontSize: 18),
                         );
                       },
@@ -276,7 +274,7 @@ class MapPickerState extends State<MapPicker> {
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.latitude},${location?.longitude}'
           '&key=${widget.apiKey}&language=${widget.language}';
 
-      var response = jsonDecode((await http.get(endPoint,
+      var response = jsonDecode((await http.get(Uri.parse(endPoint),
               headers: await LocationUtils.getAppHeaders()))
           .body);
 
@@ -355,14 +353,11 @@ class MapPickerState extends State<MapPicker> {
             return true;
           },
           child: AlertDialog(
-            title: Text(
-                'Access to location denied'),
-            content: Text(
-                
-                    'Allow access to the location services.'),
+            title: Text('Access to location denied'),
+            content: Text('Allow access to the location services.'),
             actions: <Widget>[
               FlatButton(
-                child: Text( 'Ok'),
+                child: Text('Ok'),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                   _initCurrentLocation();
@@ -388,13 +383,12 @@ class MapPickerState extends State<MapPicker> {
             return true;
           },
           child: AlertDialog(
-            title: Text(
-                'Access to location permanently denied'),
+            title: Text('Access to location permanently denied'),
             content: Text(
                 'Allow access to the location services for this App using the device settings.'),
             actions: <Widget>[
               FlatButton(
-                child: Text( 'Ok'),
+                child: Text('Ok'),
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
                   openAppSettings();
@@ -417,10 +411,8 @@ class MapPickerState extends State<MapPicker> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(
-                  "Can't get current location"),
-              content: Text(
-                  'Please make sure you enable GPS and try again'),
+              title: Text("Can't get current location"),
+              content: Text('Please make sure you enable GPS and try again'),
               actions: <Widget>[
                 FlatButton(
                   child: Text('Ok'),

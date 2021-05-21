@@ -1,5 +1,5 @@
 name: google_map_location_picker
-description: '🌍 Map location picker for flutter Based on google_maps_flutter'
+description: "🌍 Map location picker for flutter Based on google_maps_flutter"
 version: 4.1.2+1
 homepage: https://github.com/humazed/google_map_location_picker
 
@@ -11,30 +11,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # flutter_localizations:
-  #   sdk: flutter
-  # intl: '>=0.16.0 <=0.16.1'
-  # intl_translation: '>=0.17.9 <=0.17.10'
-
-  google_maps_flutter: ^1.0.6
-  geolocator: ^6.1.6
   android_intent: ^0.3.7+7
+  geolocator: ^6.1.6
+  google_maps_flutter: ^1.0.6
+  http: ^0.13.3
+  package_info: ">=0.4.0+14 <2.0.0"
   provider: ^4.3.2+2
-  http: ^0.12.2
   stack_trace: ^1.9.6
-  package_info: '>=0.4.0+14 <2.0.0'
 
 # dependency_overrides:
-#   intl: 0.17.0-nullsafety.2
-
+#   intl: 0.17.0-null safety.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
   # This section identifies this Flutter project as a plugin project.
@@ -52,7 +44,6 @@ flutter:
         package: com.humazed.google_map_location_picker
         pluginClass: GoogleMapLocationPickerPlugin
     # -------------------
-
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -63,7 +54,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
