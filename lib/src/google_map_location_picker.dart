@@ -9,6 +9,7 @@ import 'package:google_map_location_picker/src/providers/location_provider.dart'
 import 'package:google_map_location_picker/src/rich_suggestion.dart';
 import 'package:google_map_location_picker/src/search_input.dart';
 import 'package:google_map_location_picker/src/utils/uuid.dart';
+import 'package:google_map_location_picker/yhh/autohide_keyboard.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -117,28 +118,30 @@ class LocationPickerState extends State<LocationPicker> {
     final RenderBox appBarBox = appBarKey.currentContext.findRenderObject();
 
     overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: appBarBox.size.height,
-        width: size.width,
-        child: Material(
-          elevation: 1,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            child: Row(
-              children: <Widget>[
-                SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(strokeWidth: 3),
-                ),
-                SizedBox(width: 24),
-                Expanded(
-                  child: Text(
-                    'Finding place...',
-                    style: TextStyle(fontSize: 16),
+      builder: (context) => AutoHideKeyboard(
+        child: Positioned(
+          top: appBarBox.size.height,
+          width: size.width,
+          child: Material(
+            elevation: 1,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(strokeWidth: 3),
                   ),
-                )
-              ],
+                  SizedBox(width: 24),
+                  Expanded(
+                    child: Text(
+                      'Finding place...',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -247,18 +250,19 @@ class LocationPickerState extends State<LocationPicker> {
     clearOverlay();
 
     overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        width: size.width,
-        top: appBarBox.size.height,
-        child: Material(
-          elevation: 1,
-          child: Column(
-            children: suggestions,
+      builder: (context) => AutoHideKeyboard(
+        child: Positioned(
+          width: size.width,
+          top: appBarBox.size.height,
+          child: Material(
+            elevation: 1,
+            child: Column(
+              children: suggestions,
+            ),
           ),
         ),
       ),
     );
-
     Overlay.of(context).insert(overlayEntry);
   }
 
@@ -403,31 +407,26 @@ class LocationPickerState extends State<LocationPicker> {
               hintText: widget.hintText,
             ),
           ),
-          body: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: MapPicker(
-              widget.apiKey,
-              initialCenter: widget.initialCenter,
-              initialZoom: widget.initialZoom,
-              requiredGPS: widget.requiredGPS,
-              myLocationButtonEnabled: widget.myLocationButtonEnabled,
-              layersButtonEnabled: widget.layersButtonEnabled,
-              automaticallyAnimateToCurrentLocation:
-                  widget.automaticallyAnimateToCurrentLocation,
-              mapStylePath: widget.mapStylePath,
-              appBarColor: widget.appBarColor,
-              searchBarBoxDecoration: widget.searchBarBoxDecoration,
-              hintText: widget.hintText,
-              resultCardConfirmIcon: widget.resultCardConfirmIcon,
-              resultCardAlignment: widget.resultCardAlignment,
-              resultCardDecoration: widget.resultCardDecoration,
-              resultCardPadding: widget.resultCardPadding,
-              key: mapKey,
-              language: widget.language,
-              desiredAccuracy: widget.desiredAccuracy,
-            ),
+          body: MapPicker(
+            widget.apiKey,
+            initialCenter: widget.initialCenter,
+            initialZoom: widget.initialZoom,
+            requiredGPS: widget.requiredGPS,
+            myLocationButtonEnabled: widget.myLocationButtonEnabled,
+            layersButtonEnabled: widget.layersButtonEnabled,
+            automaticallyAnimateToCurrentLocation:
+                widget.automaticallyAnimateToCurrentLocation,
+            mapStylePath: widget.mapStylePath,
+            appBarColor: widget.appBarColor,
+            searchBarBoxDecoration: widget.searchBarBoxDecoration,
+            hintText: widget.hintText,
+            resultCardConfirmIcon: widget.resultCardConfirmIcon,
+            resultCardAlignment: widget.resultCardAlignment,
+            resultCardDecoration: widget.resultCardDecoration,
+            resultCardPadding: widget.resultCardPadding,
+            key: mapKey,
+            language: widget.language,
+            desiredAccuracy: widget.desiredAccuracy,
           ),
         );
       }),
