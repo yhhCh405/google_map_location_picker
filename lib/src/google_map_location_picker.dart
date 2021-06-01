@@ -118,10 +118,10 @@ class LocationPickerState extends State<LocationPicker> {
     final RenderBox appBarBox = appBarKey.currentContext.findRenderObject();
 
     overlayEntry = OverlayEntry(
-      builder: (context) => AutoHideKeyboard(
-        child: Positioned(
-          top: appBarBox.size.height,
-          width: size.width,
+      builder: (context) => Positioned(
+        top: appBarBox.size.height,
+        width: size.width,
+        child: AutoHideKeyboard(
           child: Material(
             elevation: 1,
             child: Container(
@@ -250,10 +250,10 @@ class LocationPickerState extends State<LocationPicker> {
     clearOverlay();
 
     overlayEntry = OverlayEntry(
-      builder: (context) => AutoHideKeyboard(
-        child: Positioned(
-          width: size.width,
-          top: appBarBox.size.height,
+      builder: (context) => Positioned(
+        width: size.width,
+        top: appBarBox.size.height,
+        child: AutoHideKeyboard(
           child: Material(
             elevation: 1,
             child: Column(
