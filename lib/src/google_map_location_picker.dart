@@ -190,7 +190,9 @@ class LocationPickerState extends State<LocationPicker> {
           aci.offset = 0;
           aci.length = 0;
 
-          suggestions.add(RichSuggestion(aci, () {}));
+          suggestions.add(RichSuggestion(aci, () {
+            AutoHideKeyboard().unFocus(context);
+          }));
         } else {
           for (dynamic t in predictions) {
             AutoCompleteItem aci = AutoCompleteItem();
@@ -202,6 +204,7 @@ class LocationPickerState extends State<LocationPicker> {
 
             suggestions.add(RichSuggestion(aci, () {
               decodeAndSelectPlace(aci.id);
+              AutoHideKeyboard().unFocus(context);
             }));
           }
         }

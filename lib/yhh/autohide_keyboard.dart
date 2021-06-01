@@ -12,4 +12,8 @@ class AutoHideKeyboard extends StatelessWidget {
       child: child ?? Container(),
     );
   }
+
+  void unFocus(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
 }
