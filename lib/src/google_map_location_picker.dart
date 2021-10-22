@@ -9,6 +9,7 @@ import 'package:google_map_location_picker/src/providers/location_provider.dart'
 import 'package:google_map_location_picker/src/rich_suggestion.dart';
 import 'package:google_map_location_picker/src/search_input.dart';
 import 'package:google_map_location_picker/src/utils/uuid.dart';
+import 'package:google_map_location_picker/yhh/autohide_keyboard.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -120,25 +121,27 @@ class LocationPickerState extends State<LocationPicker> {
       builder: (context) => Positioned(
         top: appBarBox.size.height,
         width: size.width,
-        child: Material(
-          elevation: 1,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            child: Row(
-              children: <Widget>[
-                SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(strokeWidth: 3),
-                ),
-                SizedBox(width: 24),
-                Expanded(
-                  child: Text(
-                    'Finding place...',
-                    style: TextStyle(fontSize: 16),
+        child: AutoHideKeyboard(
+          child: Material(
+            elevation: 1,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(strokeWidth: 3),
                   ),
-                )
-              ],
+                  SizedBox(width: 24),
+                  Expanded(
+                    child: Text(
+                      'Finding place...',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -187,7 +190,9 @@ class LocationPickerState extends State<LocationPicker> {
           aci.offset = 0;
           aci.length = 0;
 
-          suggestions.add(RichSuggestion(aci, () {}));
+          suggestions.add(RichSuggestion(aci, () {
+            AutoHideKeyboard().unFocus(context);
+          }));
         } else {
           for (dynamic t in predictions) {
             AutoCompleteItem aci = AutoCompleteItem();
@@ -199,6 +204,7 @@ class LocationPickerState extends State<LocationPicker> {
 
             suggestions.add(RichSuggestion(aci, () {
               decodeAndSelectPlace(aci.id);
+              AutoHideKeyboard().unFocus(context);
             }));
           }
         }
@@ -250,15 +256,16 @@ class LocationPickerState extends State<LocationPicker> {
       builder: (context) => Positioned(
         width: size.width,
         top: appBarBox.size.height,
-        child: Material(
-          elevation: 1,
-          child: Column(
-            children: suggestions,
+        child: AutoHideKeyboard(
+          child: Material(
+            elevation: 1,
+            child: Column(
+              children: suggestions,
+            ),
           ),
         ),
       ),
     );
-
     Overlay.of(context).insert(overlayEntry);
   }
 

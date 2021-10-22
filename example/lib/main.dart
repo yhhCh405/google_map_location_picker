@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
                 RaisedButton(
                   onPressed: () async {
                     LocationResult result = await showLocationPicker(
-                      context, "",// apiKey,
+                      context, "AIzaSyBpVfG3aU92pez5_48j3TxjZ9zL43qvzIs",// apiKey,
                       initialCenter: LatLng(31.1975844, 29.9598339),
 //                      automaticallyAnimateToCurrentLocation: true,
 //                      mapStylePath: 'assets/mapStyle.json',

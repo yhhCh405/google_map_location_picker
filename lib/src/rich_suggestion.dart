@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'model/auto_comp_iete_item.dart';
+import 'package:google_map_location_picker/yhh/autohide_keyboard.dart';
 
 class RichSuggestion extends StatelessWidget {
   final VoidCallback onTap;
