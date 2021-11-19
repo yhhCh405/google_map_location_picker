@@ -17,7 +17,7 @@ dependencies:
   http: ^0.13.3
   package_info: '>=0.4.0+14 <2.0.0'
   permission_handler: ^8.0.0
-  provider: ^4.3.2+2
+  provider: ^5.0.0
   stack_trace: ^1.9.6
 
 # dependency_overrides:
