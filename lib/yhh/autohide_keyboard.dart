@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AutoHideKeyboard extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   AutoHideKeyboard({this.child});
   @override
   Widget build(BuildContext context) {
