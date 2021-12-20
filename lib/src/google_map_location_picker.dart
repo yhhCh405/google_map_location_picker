@@ -161,8 +161,8 @@ class LocationPickerState extends State<LocationPicker> {
     final countries = widget.countries;
 
     // Currently, you can use components to filter by up to 5 countries. from https://developers.google.com/places/web-service/autocomplete
-    String regionParam = countries?.isNotEmpty == true
-        ? "&components=country:${countries!.sublist(0, min(countries.length, 5)).join('|country:')}"
+    String regionParam = countries != null && countries.isNotEmpty == true
+        ? "&components=country:${countries.sublist(0, min(countries.length, 5)).join('|country:')}"
         : "";
 
     var endpoint =

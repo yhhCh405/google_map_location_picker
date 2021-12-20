@@ -7,7 +7,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
-
 import 'package:google_map_location_picker/src/providers/location_provider.dart';
 import 'package:google_map_location_picker/src/utils/loading_builder.dart';
 import 'package:google_map_location_picker/src/utils/log.dart';
@@ -96,7 +95,8 @@ class MapPickerState extends State<MapPicker> {
     Position? currentPosition;
     try {
       currentPosition = await GeolocatorPlatform.instance.getCurrentPosition(
-          locationSettings: LocationSettings(accuracy: widget.desiredAccuracy!));
+          locationSettings:
+              LocationSettings(accuracy: widget.desiredAccuracy!));
       d("position = $currentPosition");
 
       setState(() => _currentPosition = currentPosition);
@@ -227,7 +227,7 @@ class MapPickerState extends State<MapPicker> {
                 children: <Widget>[
                   Flexible(
                     flex: 20,
-                    child: FutureLoadingBuilder<Map<String, String?>>(
+                    child: FutureLoadingBuilder<Map<String, String?>?>(
                       future: getAddress(locationProvider.lastIdleLocation),
                       mutable: true,
                       loadingIndicator: Row(
@@ -237,8 +237,8 @@ class MapPickerState extends State<MapPicker> {
                         ],
                       ),
                       builder: (context, data) {
-                        _address = data["address"];
-                        _placeId = data["placeId"];
+                        _address = data?["address"];
+                        _placeId = data?["placeId"];
                         return Text(
                           _address ?? 'Unnamed place',
                           style: TextStyle(fontSize: 18),
@@ -269,14 +269,15 @@ class MapPickerState extends State<MapPicker> {
     );
   }
 
-  Future<Map<String, String?>> getAddress(LatLng? location) async {
+  Future<Map<String, String?>?> getAddress(LatLng? location) async {
     try {
       final endPoint =
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.latitude},${location?.longitude}'
           '&key=${widget.apiKey}&language=${widget.language}';
 
       var response = jsonDecode((await http.get(Uri.parse(endPoint),
-              headers: await (LocationUtils.getAppHeaders() as FutureOr<Map<String, String>?>)))
+              headers: await (LocationUtils.getAppHeaders()
+                  as FutureOr<Map<String, String>?>)))
           .body);
 
       return {
