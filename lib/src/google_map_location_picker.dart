@@ -339,8 +339,7 @@ class LocationPickerState extends State<LocationPicker> {
             "https://maps.googleapis.com/maps/api/geocode/json?latlng=${latLng.latitude},${latLng.longitude}" +
                 "&key=${widget.apiKey}" +
                 "&language=${widget.language}"),
-        headers: await (LocationUtils.getAppHeaders()
-            as FutureOr<Map<String, String>?>));
+        headers: await LocationUtils.getAppHeaders());
 
     if (response.statusCode == 200) {
       Map<String, dynamic> responseJson = jsonDecode(response.body);
